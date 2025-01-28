@@ -10,7 +10,7 @@ import Six from "../assets/six.png";
 
 import Clock from "../assets/c.png";
 import P from "../assets/p.png";
-import P2 from "../assets/p2.png";
+import P2 from "../assets/P2.png";
 import P3 from "../assets/p3.png";
 
 
