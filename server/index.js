@@ -12,8 +12,9 @@ const app = express();   // Express app create pannum//
 
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Frontend app URL access panna permission kudukkum
-  methods: 'GET,POST,PUT,DELETE',  // HTTP methods like GET, POST, etc. support pannum
-  credentials: true
+  methods: 'GET,POST,PUT,DELETE',  
+  allowedHeaders : 'Content-Type,Authorization',
+  credentials: true,
 }));
 
 

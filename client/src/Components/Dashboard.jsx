@@ -49,7 +49,7 @@ function DashBoard() {
 
       try {
 
-        const response = await axios.get(`${apiUrl}/tasks`);
+        const response = await axios.get(`${apiUrl}/tasks` ,{withCredentials:true});
         const userTasks = response.data.filter(task => task.userId === user.uid); // Filter tasks based on userId
         setTasks(userTasks); // Set only the current user's tasks
         setAllTasks(response.data); // Optional: Keep all tasks if needed for other operations
@@ -71,7 +71,7 @@ const handleSubmit = async () => {
     setError("");
     if (title.trim() !== "" && description.trim() !== "") {
       try {
-        const response = await axios.post(`${apiUrl}/tasks`, {
+        const response = await axios.post(`${apiUrl}/tasks`,{
           title,
           description,
           status: "ToDo",
@@ -79,7 +79,7 @@ const handleSubmit = async () => {
           userId: user.uid
 
 
-        });
+        },{withCredentials:true});
         if (response.status === 201 || response.status === 200) {
           const newTask = response.data;
           setTasks([...tasks, newTask]);
@@ -103,7 +103,7 @@ const handleSubmit = async () => {
   // Delete Task
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${apiUrl}/tasks/${id}`);
+      await axios.delete(`${apiUrl}/tasks/${id}`,{withCredentials:true});
       const updatedTasks = tasks.filter((task) => task._id !== id);
       setTasks(updatedTasks);
       setAllTasks(updatedTasks);
@@ -123,7 +123,7 @@ const handleSubmit = async () => {
         title: editTitle,
         description: editDescription,
         status: editStatus,
-      });
+      },{withCredentials:true});
       if (response.status === 200) {
         const updatedTask = response.data;
         const updatedTasks = tasks.map((task) =>
@@ -168,7 +168,7 @@ const handleSubmit = async () => {
   
       // Update the pin status in the database
       const pinnedTask = updatedTasks.find((task) => task._id === id);
-      await axios.put(`${apiUrl}/tasks/${id}/pin`, { isPinned: pinnedTask.isPinned });
+      await axios.put(`${apiUrl}/tasks/${id}/pin` , { isPinned: pinnedTask.isPinned },{withCredentials:true});
     } catch (error) {
       setError("Unable to update pin status.");
     }
